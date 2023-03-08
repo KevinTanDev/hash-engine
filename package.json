@@ -33,7 +33,7 @@
     "prettier": "prettier --config .prettierrc --write .",
     "test:watch": "jest --watch"
   },
-  "author": "Jakub Synowiec <jsynowiec@users.noreply.github.com>",
+  "author": "Kevin TAN <kevintandev@users.noreply.github.com>",
   "license": "Apache-2.0",
   "dependencies": {
     "byte": "^2.0.0",
