@@ -33,20 +33,13 @@ export default class HashEngine {
     while (data.length > 1) {
       hashesCurrentLevel = [];
       for (let i = 0; i < data.length; i += 2) {
-        let currentHash = data[i]!;
+        let currentHash = data[i];
         const isNotLast = i + 1 < data.length;
         if (isNotLast) {
-          currentHash += data[i + 1]!;
+          currentHash += data[i + 1];
         }
 
-        /**
-         * @TODO Concat with himself
-         */
-        /*
-				else {
-					currentHash += currentHash;
-				}*/
-        currentHash = this.hashContent(algoType, encoding, currentHash!);
+        currentHash = this.hashContent(algoType, encoding, currentHash);
         hashesCurrentLevel.push(currentHash);
       }
       data = hashesCurrentLevel;
@@ -54,7 +47,7 @@ export default class HashEngine {
 
     if (data.length !== 1)
       return Promise.reject('Hashes must contains only the merkle root');
-    return Promise.resolve(data[0]!);
+    return Promise.resolve(data[0]);
   }
 
   private static async simpleConcat(
@@ -66,7 +59,7 @@ export default class HashEngine {
 
     let hash_root = '';
     for (let i = 0; i < hashes.length; i++) {
-      hash_root = hash_root.concat(hashes[i]!);
+      hash_root = hash_root.concat(hashes[i]);
     }
 
     hash_root = this.hashContent(algoType, encoding, hash_root);
@@ -80,7 +73,7 @@ export default class HashEngine {
     datas: string[],
   ): string[] {
     return datas.map((data) => {
-      return this.hashContent(algoType, encoding, data!);
+      return this.hashContent(algoType, encoding, data);
     });
   }
 
