@@ -7,7 +7,7 @@ This project is intended to be used as a library to hash documents
 
 ```sh
 npm install
-npm run tests
+npm run test
 ```
 
 ### Functionalities
