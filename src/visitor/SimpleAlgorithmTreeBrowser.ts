@@ -1,7 +1,7 @@
 import TreeElement from '../model/TreeElement.js';
 import TreeLeaf from '../model/TreeLeaf.js';
 import TreeNode from '../model/TreeNode.js';
-import { hexStringHashFromString } from '../utils/HashUtils.js';
+import { stringHashFromString } from '../utils/HashUtils.js';
 import TreeVisitor from './TreeVisitor.js';
 
 /**
@@ -40,7 +40,7 @@ export class SimpleAlgorithmTreeBrowser implements TreeVisitor<string, void> {
       sum += this.visitTreeElement(treeNode.right);
     }
     // Compute the hash of the concatenation.
-    const hash = hexStringHashFromString(this.algorithm, sum);
+    const hash = stringHashFromString(this.algorithm, sum, 'hex');
     treeNode.value = hash;
     return hash;
   }

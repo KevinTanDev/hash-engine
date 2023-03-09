@@ -63,17 +63,20 @@ class TreeBuilder<T> {
    * @param depth Depth of the node in the tree (depth of 0 representing a leaf)
    */
   private createNodes(depth: number): TreeNode<T> {
+    if(!this.elements){
+      throw new Error('Cannot build with null elements');
+    }
     // Creation of all leaves.
-    let intermediary: Array<TreeElement<T>> = this.elements!.map(
-      (elem) => new TreeLeaf(elem[0], false, this.algorithm, elem[0]),
+    let intermediary: Array<TreeElement<T>> = this.elements.map(
+      (element) => new TreeLeaf(element[0], false, this.algorithm, element[0]),
     );
     for (let currentDepth = 1; currentDepth <= depth; currentDepth++) {
       // Group all elements bu pairs.
       intermediary = intermediary.reduce<Array<TreeElement<T>>>(
-        (acc, curr, index, arr) => {
+        (previousValue, current, index, array) => {
           if (index % 2 === 0) {
-            const left = curr;
-            const right = arr[index + 1];
+            const left = current;
+            const right = array[index + 1];
             const node = new TreeNode(
               null,
               currentDepth === depth,
@@ -81,9 +84,9 @@ class TreeBuilder<T> {
               left,
               right,
             );
-            acc.push(node);
+            previousValue.push(node);
           }
-          return acc;
+          return previousValue;
         },
         [],
       );

@@ -36,7 +36,9 @@
   "author": "Kevin TAN <kevintandev@users.noreply.github.com>",
   "license": "Apache-2.0",
   "dependencies": {
+    "@types/crypto-js": "^4.1.1",
     "byte": "^2.0.0",
+    "crypto-js": "^4.1.1",
     "tslib": "~2.4"
   },
   "volta": {

@@ -17,7 +17,7 @@ describe('SHA256TreeVisitorTest', () => {
     )
       .setElements(elements)
       .build();
-      merkleTree.value = SHA256TreeVisitor.visitTree(merkleTree);
+      SHA256TreeVisitor.visitTree(merkleTree);
     expect(merkleTree.value).toBe(expected);
   });
 
@@ -30,7 +30,7 @@ describe('SHA256TreeVisitorTest', () => {
     )
       .setElements(elements)
       .build();
-      merkleTree.value = SHA256TreeVisitor.visitTree(merkleTree);
+      SHA256TreeVisitor.visitTree(merkleTree);
     expect(merkleTree.value).toBe(expected);
   });
 
@@ -43,7 +43,7 @@ describe('SHA256TreeVisitorTest', () => {
     )
       .setElements(elements)
       .build();
-      merkleTree.value = SHA256TreeVisitor.visitTree(merkleTree);
+      SHA256TreeVisitor.visitTree(merkleTree);
     expect(merkleTree.value).toBe(expected);
   });
 
@@ -56,7 +56,7 @@ describe('SHA256TreeVisitorTest', () => {
     )
       .setElements(elements)
       .build();
-      merkleTree.value = SHA256TreeVisitor.visitTree(merkleTree);
+      SHA256TreeVisitor.visitTree(merkleTree);
     expect(merkleTree.value).toBe(expected);
   });
 
@@ -69,7 +69,7 @@ describe('SHA256TreeVisitorTest', () => {
     )
       .setElements(elements)
       .build();
-      merkleTree.value = SHA256TreeVisitor.visitTree(merkleTree);
+      SHA256TreeVisitor.visitTree(merkleTree);
     expect(merkleTree.value).toBe(expected);
   });
 
@@ -82,7 +82,7 @@ describe('SHA256TreeVisitorTest', () => {
     )
       .setElements(elements)
       .build();
-      merkleTree.value = SHA256TreeVisitor.visitTree(merkleTree);
+      SHA256TreeVisitor.visitTree(merkleTree);
     expect(merkleTree.value).toBe(expected);
   });
 });

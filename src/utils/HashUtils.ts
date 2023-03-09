@@ -1,21 +1,22 @@
 import * as crypto from 'crypto';
 
+
 /**
- * Convert a ByteArray to a hexString.
+ * Convert a ByteArray to a string.
  * @param byteArray ByteArray to convert.
- * @return The HexString representation of the ByteArray.
+ * @return The String representation of the ByteArray.
  */
-export function byteArrayToHexString(byteArray: Uint8Array): string {
-  return Buffer.from(byteArray).toString('hex');
+export function byteArrayToEncodeString(byteArray: Uint8Array, encoding: BufferEncoding): string {
+  return Buffer.from(byteArray).toString(encoding);
 }
 
 /**
- * Convert a HexString to a ByteArray.
- * @param hexString HexString to convert.
- * @return The ByteArray representation of the HexString.
+ * Convert a String to a ByteArray.
+ * @param string String to convert.
+ * @return The ByteArray representation of the String.
  */
-export function hexStringToByteArray(hexString: string): Uint8Array {
-  return new Uint8Array(Buffer.from(hexString, 'hex'));
+export function encodeStringToByteArray(string: string, encoding: BufferEncoding): Uint8Array {
+  return new Uint8Array(Buffer.from(string, encoding));
 }
 
 /**
@@ -34,41 +35,45 @@ export function byteArrayHashFromArray(
 }
 
 /**
- * Compute the ByteArray representation of the hash of the HexString input.
+ * Compute the ByteArray representation of the hash of the String input.
  * @param algorithm Hash algorithm.
- * @param hexString HexString to hash.
+ * @param string String to hash.
  * @return ByteArray representation of hash.
  */
 export function byteArrayHashFromString(
   algorithm: string,
-  hexString: string,
+  string: string,
+  encoding: BufferEncoding
 ): Uint8Array {
-  return byteArrayHashFromArray(algorithm, hexStringToByteArray(hexString));
+  return byteArrayHashFromArray(algorithm, encodeStringToByteArray(string, encoding));
 }
 
 /**
- * Compute the HexString representation of the hash of the ByteArray input.
+ * Compute the String representation of the hash of the ByteArray input.
  * @param algorithm Hash algorithm.
  * @param byteArray ByteArray to hash.
- * @return HexString representation of hash.
+ * @return String representation of hash.
  */
-export function hexStringHashFromArray(
+export function stringHashFromArray(
   algorithm: string,
   byteArray: Uint8Array | Uint16Array | Uint32Array,
+  encoding: BufferEncoding
 ): string {
-  return byteArrayToHexString(byteArrayHashFromArray(algorithm, byteArray));
+  return byteArrayToEncodeString(byteArrayHashFromArray(algorithm, byteArray), encoding);
 }
 
 /**
- * Compute the HexString representation of the hash of the HexString input.
+ * Compute the String representation of the hash of the String input.
  * @param algorithm Hash algorithm.
- * @param hexString HexString to hash.
- * @return HexString representation of hash.
+ * @param string String to hash.
+ * @return String representation of hash.
  */
-export function hexStringHashFromString(
+export function stringHashFromString(
   algorithm: string,
-  hexString: string,
+  string: string,
+  encoding: BufferEncoding
 ): string {
-  return byteArrayToHexString(byteArrayHashFromString(algorithm, hexString));
+  return byteArrayToEncodeString(byteArrayHashFromString(algorithm, string, encoding), encoding);
 }
+
 
