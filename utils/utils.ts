@@ -1,6 +1,5 @@
-import * as fsPromises from 'fs/promises';
-import { stringHashFromArray } from '../src/utils/HashUtils.js';
 import * as ByteBuffer from 'byte';
+import * as fsPromises from 'fs/promises';
 import * as path from 'path';
 
 export async function getTestElements(): Promise<[string, any][]> {
@@ -8,14 +7,12 @@ export async function getTestElements(): Promise<[string, any][]> {
   const filesPath = await fsPromises.readdir(assetDir);
   const elements: [string, any][] = [];
   for (const filePath of filesPath) {
-    elements.push([
-      stringHashFromArray(
-        'sha256',
-        await fsPromises.readFile(path.resolve(assetDir, `${filePath}`)),
-        "hex"
-      ),
-      filePath,
-    ]);
+    const encoding = 'hex';;
+    const content = Buffer.from(
+      await fsPromises.readFile(path.resolve(assetDir, `${filePath}`)),
+    ).toString(encoding);
+
+    elements.push([content, filePath]);
   }
   return elements;
 }
@@ -25,7 +22,8 @@ export function generateTestElements(number: number): [string, any][] {
     const bb = ByteBuffer.allocate(4);
     bb.putInt(i);
     const toHash = new Uint8Array(bb.array());
-    const hash = stringHashFromArray('sha256', toHash, "hex");
-    return [hash, toHash];
+    const encoding = 'hex';
+    const content = Buffer.from(new Uint8Array(bb.array())).toString(encoding);
+    return [content, toHash];
   });
 }

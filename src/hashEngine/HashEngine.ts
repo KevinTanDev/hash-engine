@@ -1,17 +1,12 @@
-import { stringHashFromString } from '../utils/HashUtils.js';
-
+import * as crypto from 'crypto';
 export default class HashEngine {
   public static async execute(
     methodType: string,
     algoType: string,
     encoding: BufferEncoding,
     data: string[],
-    shouldHashData = false,
   ): Promise<string> {
-    let hashes = [...data];
-    if (shouldHashData) {
-      hashes = this.hashSources(algoType, encoding, data);
-    }
+    const hashes = this.hashSources(algoType, encoding, data);
     switch (methodType) {
       case 'merkleTree':
         return Promise.resolve(this.merkleRoot(algoType, encoding, hashes));
@@ -82,7 +77,8 @@ export default class HashEngine {
     encoding: BufferEncoding,
     content: string,
   ): string {
-
-    return stringHashFromString(algoType, content, encoding);
+    const hash = crypto.createHash(algoType);
+    hash.update(content, encoding);
+    return hash.digest().toString(encoding);
   }
 }
