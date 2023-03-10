@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-export default class HashEngine {
+export default class HashEngineV2 {
   public static async execute(
     methodType: string,
     algoType: string,
@@ -32,7 +32,9 @@ export default class HashEngine {
         const isNotLast = i + 1 < data.length;
         if (isNotLast) {
           currentHash += data[i + 1];
-        }
+        } else {
+					currentHash += currentHash;
+				}
 
         currentHash = this.hashContent(algoType, encoding, currentHash);
         hashesCurrentLevel.push(currentHash);

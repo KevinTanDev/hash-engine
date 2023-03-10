@@ -1,4 +1,5 @@
 # HashEngine
+
 ## Getting Started
 
 This project is intended to be used as a library to hash documents
@@ -14,14 +15,30 @@ npm run test
 
 Hash engine can hash several document hashes into a root hash using the Merkletree model or concat model.
 
-### Example
+## Example
+
+### HashEngineV1
 
 ```typescript
 
-import HashEngine from './hashEngine/HashEngine.js';
+import HashEngineV1 from './HashEngineV1.js';
 
 const stringElements = ["test"]
-const hashRoot = await HashEngine.execute(
+const hashRoot = await HashEngineV1.execute(
+      'sha256',
+      'hex',
+      stringElements,
+    );
+```
+
+### HashEngineV2
+
+```typescript
+
+import HashEngineV2 from './HashEngineV2.js';
+
+const stringElements = ["test"]
+const hashRoot = await HashEngineV2.execute(
       'merkleTree',
       'sha256',
       'hex',
@@ -29,7 +46,7 @@ const hashRoot = await HashEngine.execute(
     );
 ```
 
-#### Supported hash algorithms
+## Supported hash algorithms
 
 ```[ 'DSA',
   'DSA-SHA',
@@ -79,6 +96,6 @@ const hashRoot = await HashEngine.execute(
   'whirlpool' ]
 ```
 
-#### Supported encoding
+## Supported encoding
 
 ```[ 'ascii', 'utf8', 'utf-8', 'utf16le', 'ucs2', 'ucs-2', 'base64', 'base64url', 'latin1', 'binary', 'hex' ]```
